@@ -1,9 +1,10 @@
 EXE=compiler
 CC=g++
-OBJ=main.o
-CFLAGS=-g -Wno-deprecated
+OBJ=main.o scanner.o token.o semanticAnalyzer.o symbol.o symbolTable.o \
+    genIr.o interCode.o
+CPPFLAGS += -g
 $(EXE):$(OBJ)
-	$(CC) $(OBJ) -o $(EXE) $(CFLAGS)
+	$(CC) $(CFLAGS) -o $(EXE) $(OBJ) 
 	rm $(OBJ) *~ -f
 clean:
 	rm $(EXE) $(OBJ) *~ -f
