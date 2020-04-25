@@ -1,0 +1,81 @@
+.section .rodata
+.data
+	.global g
+g:
+	.word 50
+	.global h
+h:
+	.word 51
+#未优化代码
+.text
+#函数fun代码
+	.global fun
+fun:
+entry
+dec a
+dec .L2
+.L2 = a + 2
+dec b
+b = .L2
+dec .L3
+.L3 = a * b
+dec c
+c = .L3
+dec .L4
+.L4 = b * c
+dec d
+d = .L4
+dec e
+dec i
+dec .L5
+.L5 = a > b
+if( !.L5 )goto .L6
+dec .L7
+.L7 = a * b
+c = .L7
+dec .L8
+.L8 = b / c
+d = .L8
+dec .L9
+.L9 = c %% d
+e = .L9
+goto .L10
+.L6.L10.L11dec .L13
+.L13 = a * b
+c = .L13
+dec .L14
+.L14 = b * c
+d = .L14
+dec .L15
+.L15 = c * d
+e = .L15
+dec .L16
+.L16 = i
+i = i - 1
+if( .L16 )goto .L11
+.L12dec .L17
+.L17 = a + e
+.L1
+.L1exit
+#函数main代码
+	.global main
+main:
+entry
+dec i
+dec j
+.L19dec .L21
+.L21 = i
+i = i - 1
+if( !.L21 )goto .L20
+.L22 = fun()
+dec .L22
+j = .L22
+goto .L19
+.L20dec .L23
+.L23 = j + g
+dec .L24
+.L24 = .L23 + h
+j = .L24
+i = j
+.L18
+.L18exit
